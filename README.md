@@ -1,22 +1,46 @@
 # Brandschutzordnung Studio
 
-Brandschutzordnung Studio ist eine vollständig browserbasierte, regelbasierte Anwendung zur strukturierten Erstellung von Brandschutzordnungen **Teil A, Teil B und Teil C**. Die Anwendung arbeitet ohne künstliche Intelligenz. Projektdaten werden standardmäßig nur im Browser verarbeitet und lokal gespeichert.
+Brandschutzordnung Studio ist eine browserbasierte, regelbasierte Anwendung zur strukturierten Erstellung von Brandschutzordnungen **Teil A, Teil B und Teil C** für unterschiedliche Unternehmen, Einrichtungen und Nutzungsarten in Deutschland. Die Anwendung arbeitet ohne künstliche Intelligenz. Projektdaten werden standardmäßig nur im Browser verarbeitet und lokal gespeichert.
 
 ## Funktionsumfang
 
-- Teil A als einseitiger A4-Aushang mit 10-mm-Rahmen und druckoptimierter Ausgabe
+- Teil A als einseitiger A4-Aushang
 - Teil B für Personen ohne besondere Brandschutzaufgaben
 - Teil C für Personen mit besonderen Brandschutzaufgaben
-- feste, nicht frei verfälschbare Kapitelstruktur für Teil B und C
+- feste Kapitelstruktur und objektspezifische Formulierungshilfen
+- Auswahl aller 16 Bundesländer ohne voreingestellte Region
+- Klassifikation der Nutzungs-/Objektart und Prüfung möglicher Sonderbauanforderungen
 - Anwendbarkeitsprüfung über Baugenehmigung, Brandschutzkonzept, behördliche Auflage und Gefährdungsbeurteilung
-- Auswahl aller 16 Bundesländer und dokumentierte Prüfung von Landesbau- und Sonderbauvorschriften
-- Gefährdungsprofil für u. a. Publikumsverkehr, eingeschränkte Mobilität, Heißarbeiten, Ex-Bereiche, Gefahrstoffe, Ammoniak, Hochregallager, Brandmelde-, Sprinkler-, RWA- und Gaslöschanlagen
+- branchen- und nutzungsneutrales Gefährdungsprofil, unter anderem für Publikumsverkehr, Betreuung/Pflege, Fremdfirmen, Heißarbeiten, Gefahrstoffe, Ex-Bereiche, Lithium-Ionen-Akkus, brennbare Stäube, Lager, Küchen, PV-, Brandmelde-, Lösch- und Entrauchungsanlagen
 - Ersteller-Prüfer-Freigeber-Workflow mit Dokumentnummer, Version, Gültigkeit und Änderungsvermerk
-- Warnung bei einem Prüfintervall von mehr als 24 Monaten
 - lokale Autospeicherung sowie Export/Import als `.bso.json`
 - regelbasierter Prüfbericht mit direkter Navigation zur Fundstelle
 - A4-Druckausgabe über den Browser
-- automatische Tests der Prüflogik und GitHub-Pages-Deployment
+
+## Fach- und Risikoprüfung
+
+Zusätzlich zur formalen Regelprüfung enthält die Anwendung einen internen Qualitätsschritt aus zwei Perspektiven:
+
+### BSB-Fachprüfung
+
+- tatsächliche Nutzung und örtliche Verhältnisse
+- Widerspruchsfreiheit zu Genehmigung, Brandschutzkonzept, Alarmplan, Feuerwehrplan sowie Flucht- und Rettungsplänen
+- korrekte Zielgruppenabgrenzung für Teil A/B/C
+- Alarmierungs-, Räumungs- und Vertretungsorganisation für alle Betriebszeiten
+- besondere Personengruppen, Sprache und Barrierefreiheit
+- Heißarbeiten, Fremdfirmen, Änderungen und Ausfälle von Brandschutzeinrichtungen
+- dokumentierte Entscheidung, ob eine brandschutzbeauftragte Person erforderlich, empfohlen oder nicht erforderlich ist
+
+### Sachschutz und Betriebsunterbrechung
+
+- Brandabschnitte, Abschlüsse und Schadenbegrenzung
+- Zündquellen, Brandlasten, Lagerung und Brandstiftung
+- Verfügbarkeit und Außerbetriebnahme technischer Brandschutzanlagen
+- Feuerwehrzugang, Löschwasserversorgung und Planbereitstellung
+- kritische Prozesse, Wiederanlauf und Betriebsunterbrechungsrisiken
+- objektspezifische Versichereranforderungen und Risikoberichte
+
+Dieser Prüfschritt ist **kein Bestandteil der DIN-14096-Ausgabe** und erteilt keine Versichererfreigabe. Er dient der Qualitätssicherung und verweist offene bauliche, technische oder organisatorische Punkte in ein separates Maßnahmenmanagement.
 
 ## Fachliche Basis
 
@@ -29,29 +53,16 @@ Die Prüflogik und Benutzerführung berücksichtigen insbesondere:
 - ASR A1.3 „Sicherheits- und Gesundheitsschutzkennzeichnung“
 - ASR V3a.2 „Barrierefreie Gestaltung von Arbeitsstätten“
 - DIN 14096:2014-05 „Brandschutzordnung – Regeln für das Erstellen und das Aushängen“
-- DIN EN ISO 216 für Papierformate
-- DIN EN ISO 7010 in Verbindung mit ASR A1.3 für Sicherheitszeichen
-- Gefahrstoffverordnung, insbesondere Brand- und Explosionsgefährdungen
+- DIN EN ISO 216 und DIN EN ISO 7010
+- Gefahrstoffverordnung und TRGS 800 „Brandschutzmaßnahmen“
 - DGUV Informationen 205-001, 205-003 und 205-023
+- VdS 2000 „Brandschutz im Betrieb“ als ergänzende Perspektive der Schadenverhütung
 
-Die Anwendung enthält keine vollständige Wiedergabe kostenpflichtiger Normtexte. Nutzer müssen die jeweils aktuelle Normfassung und objektspezifische Anforderungen selbst zugrunde legen.
+Die Anwendung enthält keine vollständige Wiedergabe kostenpflichtiger Norm- oder Richtlinientexte. Maßgeblich bleiben die jeweils aktuelle Fassung, landes- und nutzungsspezifische Vorschriften, Genehmigungsunterlagen, örtliche Anforderungen und konkrete Versicherungsverträge.
 
-## Wichtige rechtliche Abgrenzung
+## Rechtliche Abgrenzung
 
-Eine Brandschutzordnung ist objektspezifisch. Ob und in welchem Umfang Teil A, B oder C erforderlich ist, kann sich unter anderem aus folgenden Quellen ergeben:
-
-- Landesbau- und Sonderbauordnungsrecht
-- Baugenehmigung und Nebenbestimmungen
-- Brandschutzkonzept oder Brandschutznachweis
-- Gefährdungsbeurteilung
-- behördlichen oder feuerwehrtechnischen Vorgaben
-- Anforderungen des Sachversicherers
-
-Der digitale Regel-Check ist eine strukturierte Vollständigkeits- und Plausibilitätskontrolle. Er ist **keine Zertifizierung, Rechtsberatung oder Konformitätsbescheinigung**. Vor Freigabe sind eine Ortsprüfung, der Abgleich mit Genehmigungsunterlagen und eine fachkundige Prüfung erforderlich.
-
-## Sicherheitszeichen
-
-Die Vorschau verwendet vereinfachte, beschriftete Symbolfelder. Vor betrieblicher Ausgabe müssen Zeichen und Bedeutung mit ASR A1.3/DIN EN ISO 7010 und der tatsächlichen örtlichen Ausstattung abgeglichen werden. Offizielle Downloadangebote für Sicherheitszeichen stellt beispielsweise die BGHM bereit.
+Der digitale Regel-Check ist eine strukturierte Vollständigkeits- und Plausibilitätskontrolle. Er ist **keine Zertifizierung, Rechtsberatung, Normkonformitäts- oder Versichererbescheinigung**. Verantwortung und Freigabe verbleiben beim Arbeitgeber bzw. Betreiber. Vor Freigabe sind eine Ortsprüfung, der Abgleich mit den vollständigen Unterlagen und eine fachkundige Prüfung erforderlich.
 
 ## Lokaler Start
 
@@ -69,4 +80,4 @@ npm test
 
 ## Veröffentlichung
 
-Nach dem Merge in `main` testet `.github/workflows/pages.yml` die Prüflogik und veröffentlicht die statische Anwendung über GitHub Pages. In den Repository-Einstellungen muss unter **Pages → Source** die Option **GitHub Actions** ausgewählt sein.
+Nach Änderungen in `main` prüft `.github/workflows/pages.yml` die JavaScript-Module und die Regel-Engine. Für die Veröffentlichung muss unter **Settings → Pages → Source** einmalig **GitHub Actions** ausgewählt werden.
