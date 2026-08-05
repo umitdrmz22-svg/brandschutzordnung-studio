@@ -1,6 +1,6 @@
 'use strict';
 (async()=>{
-  const modules=['market-review.js','app-core.js','app-preview.js','app-forms.js','market-ui.js','app-main.js'];
+  const modules=['market-review.js','market-classification.js','app-core.js','app-preview.js','app-forms.js','market-ui.js','market-classification-ui.js','app-main.js'];
   for(const src of modules){
     await new Promise((resolve,reject)=>{
       const script=document.createElement('script');
