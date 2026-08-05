@@ -2,6 +2,7 @@
 const assert=require('node:assert/strict');
 global.BSO=require('../rules.js');
 require('../market-review.js');
+require('../market-classification.js');
 const BSO=global.BSO;
 
 const codes=d=>new Set(BSO.validate(d).map(x=>x.code));
@@ -33,7 +34,10 @@ assert.ok(!codes(fresh).has('INS_BC'));
 
 fresh.meta.objectType='Versammlungsstätte';
 fresh.object.specialBuildingStatus='Kein Sonderbau nach dokumentierter Prüfung';
-assert.ok(codes(fresh).has('OBJ_SPECIAL_EXPECTED'));
+assert.ok(!codes(fresh).has('OBJ_SPECIAL_EXPECTED'));
+assert.ok(codes(fresh).has('OBJ_SPECIAL_BASIS'));
+fresh.object.specialBuildingBasis='Prüfung der landesrechtlichen Schwellenwerte und Genehmigungslage';
+assert.ok(!codes(fresh).has('OBJ_SPECIAL_BASIS'));
 
 const insurerFinding=BSO.validate(fresh).find(x=>x.code==='INS_COMPARTMENTS');
 assert.equal(insurerFinding.perspective,'Sachschutz/Betriebsunterbrechung');
