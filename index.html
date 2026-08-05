@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Regelbasierter Ersteller für Brandschutzordnungen Teil A, B und C nach DIN 14096 und den betrieblichen Anforderungen.">
+  <title>Brandschutzordnung Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brandmark">BSO</span><div><strong>Brandschutzordnung Studio</strong><small>Teil A · B · C</small></div></div>
+  <div class="status">Keine KI · lokale Verarbeitung</div>
+  <div class="actions">
+    <button id="newBtn" class="btn ghost">Neu</button>
+    <button id="demoBtn" class="btn ghost">Muster</button>
+    <button id="saveBtn" class="btn ghost">Projekt sichern</button>
+    <label class="btn ghost file">Projekt öffnen<input id="openFile" type="file" accept=".bso.json,application/json"></label>
+    <button id="checkBtn" class="btn primary">Regel-Check</button>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="progress"><div><span id="progressLabel">0 % vollständig</span><b id="progressCount">0/7</b></div><div class="track"><i id="progressBar"></i></div></div>
+    <nav id="steps">
+      <button class="active" data-section="meta"><span>1</span>Grunddaten</button>
+      <button data-section="scope"><span>2</span>Geltungsbereich</button>
+      <button data-section="partA"><span>3</span>Teil A</button>
+      <button data-section="partB"><span>4</span>Teil B</button>
+      <button data-section="partC"><span>5</span>Teil C</button>
+      <button data-section="release"><span>6</span>Freigabe</button>
+      <button data-section="check"><span>7</span>Prüfbericht</button>
+    </nav>
+  </aside>
+  <main class="editor">
+    <section id="meta" class="panel active">
+      <div class="heading"><span>01</span><div><h1>Grunddaten</h1><p>Unternehmen, Objekt, Dokumentenlenkung und Verantwortlichkeiten festlegen.</p></div></div>
+      <div class="grid two">
+        <label>Unternehmen<input data-path="meta.company" placeholder="Muster GmbH"></label>
+        <label>Standort<input data-path="meta.site" placeholder="Werk Musterstadt"></label>
+        <label>Gebäude / Bereich<input data-path="meta.area" placeholder="Produktion und Verwaltung"></label>
+        <label>Dokumentnummer<input data-path="meta.documentNo" placeholder="BSO-001"></label>
+        <label>Version<input data-path="meta.version" placeholder="1.0"></label>
+        <label>Gültig ab<input data-path="meta.validFrom" type="date"></label>
+        <label>Erstellt durch<input data-path="meta.author" placeholder="Name / Funktion"></label>
+        <label>Geprüft durch<input data-path="meta.reviewer" placeholder="Name / Funktion"></label>
+        <label>Freigegeben durch<input data-path="meta.approver" placeholder="Name / Funktion"></label>
+        <label>Nächste Überprüfung<input data-path="meta.nextReview" type="date"></label>
+      </div>
+      <div class="note"><b>Dokumentenlenkung</b><p>Version, Gültigkeitsdatum, Verantwortliche und nächste Prüfung werden in den Ausgaben geführt. Änderungen müssen vor erneuter Ausgabe geprüft und freigegeben werden.</p></div>
+    </section>
+    <section id="scope" class="panel">
+      <div class="heading"><span>02</span><div><h1>Geltungsbereich und Gefährdungsprofil</h1><p>Die Inhalte werden anhand der betrieblichen Situation ein- oder ausgeblendet.</p></div></div>
+      <div class="grid two">
+        <label>Personengruppen<textarea data-path="scope.people" rows="3" placeholder="Beschäftigte, Fremdfirmen, Besucher"></textarea></label>
+        <label>Besondere Bereiche<textarea data-path="scope.specialAreas" rows="3" placeholder="Produktion, Lager, Technikräume"></textarea></label>
+      </div>
+      <h2>Besondere Merkmale</h2>
+      <div class="checks">
+        <label><input type="checkbox" data-path="hazards.visitors">Publikums- oder Besucherverkehr</label>
+        <label><input type="checkbox" data-path="hazards.mobility">Personen mit eingeschränkter Mobilität</label>
+        <label><input type="checkbox" data-path="hazards.hotWork">Feuergefährliche Arbeiten</label>
+        <label><input type="checkbox" data-path="hazards.explosion">Explosionsgefährdete Bereiche</label>
+        <label><input type="checkbox" data-path="hazards.hazardousSubstances">Gefahrstoffe / Druckgase</label>
+        <label><input type="checkbox" data-path="hazards.fireAlarm">Brandmeldeanlage vorhanden</label>
+        <label><input type="checkbox" data-path="hazards.sprinkler">Sprinkler- oder Löschanlage vorhanden</label>
+        <label><input type="checkbox" data-path="hazards.evacuationHelpers">Räumungs- oder Evakuierungshelfer vorgesehen</label>
+      </div>
+      <label>Objektspezifische Festlegungen<textarea data-path="scope.custom" rows="5" placeholder="Alarmierungsweg, Sammelstelle, besondere Abschaltungen, Schichtbetrieb"></textarea></label>
+    </section>
+    <section id="partA" class="panel">
+      <div class="heading"><span>A</span><div><h1>Brandschutzordnung Teil A</h1><p>Aushang für alle Personen. Kurz, eindeutig und sofort erfassbar.</p></div></div>
+      <div class="grid two">
+        <label>Interne Meldestelle<input data-path="partA.internalNumber" placeholder="z. B. Leitwarte 123"></label>
+        <label>Notruf<input data-path="partA.emergencyNumber" value="112"></label>
+        <label>Sammelstelle<input data-path="partA.assemblyPoint" placeholder="Parkplatz Nord"></label>
+        <label>Alarmierung<input data-path="partA.alarm" placeholder="Druckknopfmelder / Telefon / Sirene"></label>
+      </div>
+      <label>Zusätzlicher Kurzhinweis<textarea data-path="partA.extra" rows="3" placeholder="Aufzüge nicht benutzen; Anweisungen beachten"></textarea></label>
+      <div class="note warning"><b>Format</b><p>Teil A wird als kompakter Aushang im Hochformat ausgegeben. Die Darstellung ist auf schnelle Wahrnehmung ausgelegt; die Druckansicht verwendet standardmäßig A4.</p></div>
+    </section>
+    <section id="partB" class="panel">
+      <div class="heading"><span>B</span><div><h1>Brandschutzordnung Teil B</h1><p>Regeln für alle Beschäftigten und regelmäßig anwesenden Personen.</p></div></div>
+      <div id="partBFields" class="chapter-list"></div>
+    </section>
+    <section id="partC" class="panel">
+      <div class="heading"><span>C</span><div><h1>Brandschutzordnung Teil C</h1><p>Aufgaben für Personen mit besonderen Brandschutzfunktionen.</p></div></div>
+      <div class="grid two">
+        <label>Brandschutzbeauftragte/r<input data-path="partC.fireOfficer" placeholder="Name / Kontakt"></label>
+        <label>Räumungsverantwortliche<input data-path="partC.evacuationLead" placeholder="Funktion / Vertretung"></label>
+        <label>Technische Abschaltung<input data-path="partC.shutdown" placeholder="Wer schaltet Energie / Anlagen ab?"></label>
+        <label>Einweisung Feuerwehr<input data-path="partC.fireBrigadeGuide" placeholder="Treffpunkt / zuständige Person"></label>
+      </div>
+      <div id="partCFields" class="chapter-list"></div>
+    </section>
+    <section id="release" class="panel">
+      <div class="heading"><span>06</span><div><h1>Prüfung und Freigabe</h1><p>Nur bestätigte und vor Ort geprüfte Inhalte dürfen freigegeben werden.</p></div></div>
+      <div class="checks vertical">
+        <label><input type="checkbox" data-path="release.siteChecked">Örtliche Gegebenheiten und tatsächliche Alarmierung wurden geprüft.</label>
+        <label><input type="checkbox" data-path="release.fireConceptChecked">Brandschutzkonzept, Auflagen und betriebliche Regelungen wurden berücksichtigt.</label>
+        <label><input type="checkbox" data-path="release.rolesConfirmed">Benannte Funktionen, Stellvertretungen und Kontaktdaten sind aktuell.</label>
+        <label><input type="checkbox" data-path="release.instructionsPlanned">Bekanntgabe, Unterweisung und Verteilung sind organisatorisch festgelegt.</label>
+        <label><input type="checkbox" data-path="release.professionalReview">Fachkundige Prüfung wurde durchgeführt.</label>
+      </div>
+      <label>Änderungsvermerk<textarea data-path="release.changeNote" rows="4" placeholder="Erstausgabe / Änderungen gegenüber Vorversion"></textarea></label>
+      <div class="legal"><b>Abgrenzung</b><p>Der Regel-Check prüft Vollständigkeit und Plausibilität der eingegebenen Daten. Er ersetzt keine Prüfung der baulichen und organisatorischen Verhältnisse, keine behördliche Abstimmung und keine fachkundige Freigabe.</p></div>
+    </section>
+    <section id="check" class="panel">
+      <div class="heading"><span>07</span><div><h1>Prüfbericht</h1><p>Pflichtpunkte, Hinweise und objektspezifische Prüfbedarfe.</p></div></div>
+      <div id="results" class="results empty">Regel-Check wurde noch nicht ausgeführt.</div>
+    </section>
+  </main>
+  <aside class="preview-wrap">
+    <div class="preview-toolbar">
+      <select id="previewSelect"><option value="A">Teil A</option><option value="B">Teil B</option><option value="C">Teil C</option></select>
+      <button id="printBtn" class="btn primary">Drucken / PDF</button>
+    </div>
+    <article id="preview" class="document part-a"></article>
+  </aside>
+</div>
+<script src="rules.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
