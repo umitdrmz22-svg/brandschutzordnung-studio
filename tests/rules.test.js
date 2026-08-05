@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const ctx={window:{}};
+vm.createContext(ctx);
+vm.runInContext(fs.readFileSync('rules.js','utf8'),ctx);
+const R=ctx.window.BSO_RULES,check=ctx.window.runBSOCheck;
+const d={meta:{},partA:{},partB:{},partC:{},release:{},hazards:{}};
+const r=check(d);
+assert(r.some(x=>x.type==='error'));
+assert.equal(R.partB.length,10);
+assert.equal(R.partC.length,6);
+console.log('rules.test.js: ok');
