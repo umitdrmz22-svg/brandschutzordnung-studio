@@ -34,11 +34,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - uses: actions/upload-pages-artifact@v3
+      - id: pages
+        continue-on-error: true
+        uses: actions/configure-pages@v5
+      - if: steps.pages.outcome != 'success'
+        run: echo "::warning title=GitHub Pages nicht aktiviert::Unter Settings > Pages muss Source einmalig auf GitHub Actions gesetzt werden. Danach Workflow manuell starten."
+      - if: steps.pages.outcome == 'success'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: .
-      - id: deployment
+      - if: steps.pages.outcome == 'success'
+        id: deployment
         uses: actions/deploy-pages@v4
