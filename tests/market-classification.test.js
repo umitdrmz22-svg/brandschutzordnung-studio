@@ -1,0 +1,17 @@
+'use strict';
+const assert=require('node:assert/strict');
+global.BSO=require('../rules.js');
+require('../market-review.js');
+require('../market-classification.js');
+const BSO=global.BSO;
+const codes=d=>new Set(BSO.validate(d).map(x=>x.code));
+const d=BSO.cloneDefaults();
+d.meta.objectType='Versammlungsstätte';
+d.object.specialBuildingStatus='Kein Sonderbau nach dokumentierter Prüfung';
+assert.ok(!codes(d).has('OBJ_SPECIAL_EXPECTED'));
+assert.ok(codes(d).has('OBJ_SPECIAL_BASIS'));
+d.object.specialBuildingBasis='Prüfung der landesrechtlichen Schwellenwerte und Genehmigungslage';
+assert.ok(!codes(d).has('OBJ_SPECIAL_BASIS'));
+d.object.specialBuildingStatus='Prüfung offen';
+assert.ok(codes(d).has('OBJ_SPECIAL_OPEN'));
+console.log('market-classification tests passed');

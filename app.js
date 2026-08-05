@@ -1,10 +1,10 @@
 'use strict';
 (async()=>{
-  const modules=['app-core.js','app-preview.js','app-forms.js','app-main.js'];
+  const modules=['market-review.js','market-classification.js','app-core.js','app-preview.js','app-forms.js','market-ui.js','market-classification-ui.js','market-layout.js','app-main.js'];
   for(const src of modules){
     await new Promise((resolve,reject)=>{
       const script=document.createElement('script');
-      script.src=`${src}?v=2`;
+      script.src=`${src}?v=3`;
       script.onload=resolve;
       script.onerror=()=>reject(new Error(`Modul konnte nicht geladen werden: ${src}`));
       document.body.appendChild(script);
