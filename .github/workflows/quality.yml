@@ -1,0 +1,22 @@
+name: Qualitätsprüfung
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript-Syntax prüfen
+        run: |
+          node --check app.js
+          node --check cloud-config.js
+          node --input-type=module --check < cloud-bridge.js
+          for file in market-review.js market-classification.js app-core.js app-preview.js app-forms.js market-ui.js market-classification-ui.js market-layout.js part-a-v2.js app-main.js; do
+            node --check "$file"
+          done
