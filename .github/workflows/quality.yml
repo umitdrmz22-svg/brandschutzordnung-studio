@@ -1,22 +1,38 @@
 name: Qualitätsprüfung
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch: {}
 
 permissions:
   contents: read
 
 jobs:
-  javascript:
+  qa3:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: JavaScript-Syntax prüfen
         run: |
           node --check app.js
           node --check cloud-config.js
           node --input-type=module --check < cloud-bridge.js
-          for file in market-review.js market-classification.js app-core.js app-preview.js app-forms.js market-ui.js market-classification-ui.js market-layout.js part-a-v2.js app-main.js; do
-            node --check "$file"
+          for file in market-review.js market-classification.js app-core.js app-preview.js app-forms.js market-ui.js market-classification-ui.js market-layout.js part-a-v2.js app-main.js; do node --check "$file"; done
+      - name: Modul- und Lizenzvertrag prüfen
+        run: |
+          INDEX=$(for f in index.html public/index.html docs/index.html; do if [ -f "$f" ]; then echo "$f"; break; fi; done)
+          test -n "$INDEX"
+          grep -Fq 'defidev-legal/ehs-entitlement-gate.js' "$INDEX"
+          grep -Fq 'data-product-id="ehs_brandschutzordnung_monthly"' "$INDEX"
+      - name: Funktionstests dreimal ausführen
+        run: |
+          for PASS in 1 2 3; do
+            echo "QA pass $PASS"
+            node tests/market-classification.test.js
+            node tests/market-review.test.js
+            node tests/part-a-layout.test.js
+            node tests/rules.test.js
           done
