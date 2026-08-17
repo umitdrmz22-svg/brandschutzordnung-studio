@@ -21,8 +21,12 @@ jobs:
           node --check cloud-config.js
           node --input-type=module --check < cloud-bridge.js
           for file in market-review.js market-classification.js app-core.js app-preview.js app-forms.js market-ui.js market-classification-ui.js market-layout.js part-a-v2.js app-main.js; do node --check "$file"; done
-      - name: Deploy-Lizenzvertrag prüfen
+      - name: Werk- und Lizenzisolierung prüfen
         run: |
+          grep -Fq 'origin_werk_id:originWerkId' cloud-bridge.js
+          grep -Fq ".eq('origin_werk_id',originWerkId)" cloud-bridge.js
+          grep -Fq 'selectedWerk' cloud-bridge.js
+          grep -Fq 'organizationId' cloud-bridge.js
           test -f .github/workflows/ehs-module-gate.yml
           grep -Fq 'defidev-legal/ehs-entitlement-gate.js' .github/workflows/ehs-module-gate.yml
           grep -Fq 'ehs_brandschutzordnung_monthly' .github/workflows/ehs-module-gate.yml
